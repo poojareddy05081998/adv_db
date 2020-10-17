@@ -1,6 +1,13 @@
 from bottle import get,post,run,template,request,debug,redirect
 import sqlite3
+import os
 
+ON_PYTHONANYWHERE = "PYTHONANYWHERE_DOMAIN" in os.environ.keys()
+
+if ON_PYTHONANYWHERE:
+    from bottle import default_app
+else:
+    from bottle import run, debug
 
 @get('/')
 def get_show_list():
@@ -27,5 +34,10 @@ def post_new_item():
     #return "the new item is[" + new_item + "]..."
     redirect("/")
 
-debug(True)
-run (host='localhost',port=8080)
+# debug(True)
+# run (host='localhost',port=8080)
+if ON_PYTHONANYWHERE:
+    application = default_app()
+else:
+    debug(True)
+    run(host="localhost", port=8080)
