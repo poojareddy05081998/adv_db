@@ -1,14 +1,14 @@
-
+# A very simple Bottle Hello World app for you to get started with...
 import sqlite3
 import os
 from bottle import get,post,template,request,redirect
 
 ON_PYTHONANYWHERE = "PYTHONANYWHERE_DOMAIN" in os.environ.keys()
 
-assert ON_PYTHONANYWHERE == False
+# assert ON_PYTHONANYWHERE == True
 
 if ON_PYTHONANYWHERE:
-    pass
+    from bottle import default_app
 else:
     from bottle import run,redirect
 
@@ -18,7 +18,7 @@ def get_show_list():
     cursor = connection.cursor()
     cursor.execute("select * from todo")
     result = cursor.fetchall()
-    cursor.close() 
+    cursor.close()
     return template("show_list", rows=result)
 
 @get("/new_item")
@@ -40,7 +40,7 @@ def post_new_item():
 # debug(True)
 # run (host='localhost',port=8080)
 if ON_PYTHONANYWHERE:
-    pass
+    application = default_app()
 else:
     debug(True)
     run(host="localhost", port=8080)
