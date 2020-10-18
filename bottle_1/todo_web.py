@@ -1,7 +1,7 @@
 
 import sqlite3
 import os
-from bottle import get,post,template,request,redirect
+from bottle import get,post,template,request,redirect,debug
 
 ON_PYTHONANYWHERE = "PYTHONANYWHERE_DOMAIN" in os.environ.keys()
 
