@@ -20,5 +20,5 @@
     </tr>
 %end
 </table>
-</center>
 <a href="/new_item">New Item...</a>
+</center>
